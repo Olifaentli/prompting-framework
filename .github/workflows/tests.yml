@@ -1,0 +1,35 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    # Einmal mit den erzeugten, einmal mit den von Hand geschriebenen
+    # Beschreibungen des Beispiels: Die Pipeline darf an keiner Stelle von
+    # einer bestimmten Zahl an Varianten abhaengen.
+    strategy:
+      matrix:
+        personas: [personas_generated.yaml, personas.yaml]
+    env:
+      PERSONAS: ${{ matrix.personas }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Abhängigkeiten installieren
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Tests ausführen
+        run: python -m pytest tests/ -v
+
+      - name: Versuchsplan prüfen
+        run: python src/design.py

@@ -1,0 +1,8 @@
+contrast,description,kt_item_1,kt_item_2,n_pairs,p_A_item1,p_A_item2,delta,cohens_g,discordant_10,discordant_01,mcnemar_p,original_p_A_item1,original_p_A_item2,original_delta,attenuation
+framing_outcomes,K&T 11 vs 12 — Framing identischer Endzustaende,11,12,3666,0.2559,0.6146,-0.3587,-0.7413,300,1615,2.163e-217,0.16,0.69,-0.53,0.677
+reflection_3,K&T 3 vs 3' — Reflexionseffekt (hohe Wsk.),3,3',3666,0.1258,0.7924,-0.6667,-1.4705,135,2579,0.000e+00,0.2,0.92,-0.72,0.926
+reflection_4,K&T 4 vs 4' — Reflexionseffekt (niedrige Wsk.),4,4',3666,0.5038,0.5098,-0.006,-0.012,952,974,6.323e-01,0.65,0.42,0.23,-0.026
+reflection_7,K&T 7 vs 7' — Reflexionseffekt,7,7',3666,0.1083,0.7927,-0.6844,-1.5255,86,2595,0.000e+00,0.14,0.92,-0.78,0.877
+reflection_8,K&T 8 vs 8' — Reflexionseffekt,8,8',3666,0.6566,0.4299,0.2267,0.4592,1368,537,2.514e-83,0.73,0.3,0.43,0.527
+reflection_13,K&T 13 vs 13' — Reflexionseffekt,13,13',3474,0.175,0.5993,-0.4243,-0.9075,236,1710,1.757e-275,0.18,0.7,-0.52,0.816
+reflection_14,K&T 14 vs 14' — Reflexionseffekt,14,14',3666,0.5676,0.428,0.1397,0.2802,1345,833,3.810e-28,0.72,0.17,0.55,0.254

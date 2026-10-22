@@ -1,0 +1,89 @@
+[
+ {
+  "schritt": "personen",
+  "versuch": 1,
+  "anzahl": 4,
+  "doppelt": false,
+  "fehler": [],
+  "texte": [
+   "You are 27 and work as a pastry cook in a bakery in a large city. You live alone in a rented apartment a few streets from the shop. Your mornings begin before sunrise, with a tram ride and coffee during a break; after work, you usually make supper and listen to the radio. You speak with coworkers throughout the shift and call your older sister most Sundays. You studied culinary arts at a community college after finishing secondary school. At home, you water two window-box plants and read short stories before bed. Last Thursday, rain began as you left the bakery, and a coworker shared an umbrella with you to the tram stop.",
+   "You are 39 and work as a marine biologist at a coastal research center near a small town. You live with your partner in a house on the edge of town. Your workday includes time in a laboratory and conversations with colleagues; evenings often bring a walk through the town center and dinner together. You visit your parents nearby and meet a former university classmate for coffee about once a month. You earned a bachelor’s degree in biology and a graduate degree in marine science. At home, you make tea after dinner and grow herbs on the kitchen sill. Last weekend, you and your partner stopped at the harbor, where a fishing boat had returned with a bright blue banner tied to its rail.",
+   "You are 48 and work as a primary-school teacher in a village. You live with your two children in a house near the school, and the children stay with their other parent on some weekends. Your days include lessons, lunch with other teachers, and the short walk home after classes. You speak with neighbors at the village shop and see your brother’s family most weeks. You completed a teaching degree after studying literature at university. In the evenings, you cook, help the children choose books, and knit while listening to music. On Monday, a flock of geese crossed the road in front of the school bus, and several children laughed at their slow procession.",
+   "You are 59 and work as a furniture restorer in a workshop in a village outside the city. You share a flat with two other adults in a converted house; your room overlooks a small garden. Your workday is spent among wood, fabric, and the other craftspeople, and you take a bus into the city twice a week to visit a cousin. You studied art history at university and later trained in furniture conservation. At home, you make soup on Sundays, listen to classical music, and speak with your flatmates over breakfast. A few days ago, a neighbor brought a basket of pears to the workshop, and everyone shared them during the afternoon break."
+  ]
+ },
+ {
+  "schritt": "S2a",
+  "versuch": 1,
+  "woerter": 60,
+  "fehler": [
+   "Wortzahl 60, erwartet 50 +/- 8"
+  ],
+  "text": "You are 27 and work as a pastry cook in a city bakery. You live alone in a rented apartment near the shop. You take the tram to work before sunrise, have coffee during a break, and talk with coworkers during your shift. After work, you make supper and listen to the radio. You call your older sister most Sundays."
+ },
+ {
+  "schritt": "S2a",
+  "versuch": 2,
+  "woerter": 48,
+  "fehler": [],
+  "text": "You are 27 and work as a pastry cook in a city bakery. You live alone in a rented apartment nearby. You commute by tram before sunrise, have coffee during a break, talk with coworkers during shifts, make supper after work, and call your older sister most Sundays."
+ },
+ {
+  "schritt": "S2b",
+  "versuch": 1,
+  "woerter": 70,
+  "fehler": [
+   "Wortzahl 70, erwartet 50 +/- 8"
+  ],
+  "text": "You are 39 and work as a marine biologist at a coastal research center near a small town. You live with your partner in a house on the edge of town. Your workday includes lab time and conversations with colleagues. In the evenings, you walk through town and have dinner with your partner. You visit your nearby parents and meet a former university classmate for coffee about once a month."
+ },
+ {
+  "schritt": "S2b",
+  "versuch": 2,
+  "woerter": 45,
+  "fehler": [],
+  "text": "You are 39, a marine biologist at a coastal research center, living with your partner in a house on the edge of town. You work in a lab, talk with colleagues, walk through town, share dinner, visit your parents, and meet a former classmate monthly."
+ },
+ {
+  "schritt": "S2c",
+  "versuch": 1,
+  "woerter": 53,
+  "fehler": [],
+  "text": "You are 48 and teach primary school in a village. You live near the school with your two children, who spend some weekends with their other parent. Your days include lessons, lunch with other teachers, and a walk home. You talk with neighbors at the shop and see your brother’s family most weeks."
+ },
+ {
+  "schritt": "S2d",
+  "versuch": 1,
+  "woerter": 58,
+  "fehler": [],
+  "text": "You are 59 and work as a furniture restorer in a village workshop. You share a converted house with two other adults, and your room overlooks a garden. You work with other craftspeople, talk with your flatmates over breakfast, and take the bus into the city twice a week to visit your cousin. You make soup on Sundays."
+ },
+ {
+  "schritt": "S1a",
+  "versuch": 1,
+  "woerter": 12,
+  "fehler": [],
+  "text": "You are 27 and work as a pastry cook in a bakery."
+ },
+ {
+  "schritt": "S1b",
+  "versuch": 1,
+  "woerter": 14,
+  "fehler": [],
+  "text": "You are 39 and work as a marine biologist at a coastal research center."
+ },
+ {
+  "schritt": "S1c",
+  "versuch": 1,
+  "woerter": 13,
+  "fehler": [],
+  "text": "You are 48 and work as a primary-school teacher in a village school."
+ },
+ {
+  "schritt": "S1d",
+  "versuch": 1,
+  "woerter": 12,
+  "fehler": [],
+  "text": "You are 59 and work as a furniture restorer in a workshop."
+ }
+]

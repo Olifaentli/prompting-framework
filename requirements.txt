@@ -1,0 +1,13 @@
+# Feste Versionen, damit Läufe wiederholbar sind. Jeder Lauf hält die
+# tatsächlich verwendeten zusätzlich in seiner Meta-Zeile fest (src/laufinfo.py).
+pandas==3.0.5
+numpy==2.5.2
+scipy==1.18.1
+pyreadstat==1.3.6
+openpyxl==3.1.5
+pyyaml==6.0.3
+python-dotenv==1.2.4
+anthropic==1.8.0
+openai==3.19.2
+matplotlib==3.11.2
+pytest==9.1.1

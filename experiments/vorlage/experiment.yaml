@@ -1,0 +1,37 @@
+# Vorlage fuer ein neues Experiment.
+#
+# Ordner kopieren, umbenennen und Schritt fuer Schritt nach
+# docs/EIGENES_EXPERIMENT.md fuellen. Die Vorlage laeuft so, wie sie ist,
+# gegen das Mock-Modell durch; alle Inhalte sind Platzhalter.
+
+name: Vorlage (Platzhalter)
+
+material:
+  aufgaben: items.yaml
+  personen: personas.yaml       # beim Generator: personas_generated.yaml
+
+referenzwerte: referenz/referenzwerte.csv
+
+# Durchlaeufe je Stufe und Bedingung. Mit src/power.py aus der gewuenschten
+# Genauigkeit herleiten und dann hier eintragen.
+versuchsplan:
+  n: 200
+
+# Vor der Erhebung festlegen und in ANALYSEPLAN.md begruenden.
+auswertung:
+  relevanzgrenze: 0.10
+  schwelle_ungueltig: 0.05
+
+darstellung:
+  aufgaben:
+    aufgabe_1: Aufgabe 1
+  stufen:
+    S0: keine Beschreibung
+    S1: wenig Detail
+    S2: mehr Detail
+
+# Skripte, die referenz/referenzwerte.csv aus Rohdaten erzeugen (optional).
+referenz_erstellen: []
+
+# Zusatzpruefungen je Lauf; jedes Skript erhaelt eine .parsed.csv (optional).
+pruefungen: []

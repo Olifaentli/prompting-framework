@@ -1,0 +1,18 @@
+# Umgebung
+.venv
+__pycache__/
+*.pyc
+.pytest_cache/
+.env
+
+# Rohdaten der Vergleichsstudien: werden von ihren Quellen geladen
+# (Download-Hinweise in den Skripten unter experiments/<name>/skripte/)
+experiments/*/referenz/rohdaten/
+
+# Rohprotokolle der Modellläufe: gross und nicht immer zur Weitergabe gedacht.
+# Ob die Rohdaten eines abgeschlossenen Experiments beigelegt werden, wird je
+# Experiment entschieden.
+experiments/*/laeufe/
+
+# Ergebnisse der Generalprobe mit dem Mock: keine Befunde
+experiments/*/ergebnisse/mock/

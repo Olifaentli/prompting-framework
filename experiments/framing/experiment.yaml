@@ -1,0 +1,50 @@
+# Beschreibung des Experiments.
+#
+# Das Framework liest Material, Referenzwerte und Auswertungsparameter von
+# hier; der Code selbst kennt keine festen Pfade. Ein neues Experiment ist ein
+# neuer Ordner mit einer solchen Datei (siehe docs/EIGENES_EXPERIMENT.md).
+
+name: Framing-Effekt und Detailgrad der Personenbeschreibung
+
+# Woraus die Prompts entstehen. Beide Dateien sind eingefroren; die
+# Pruefsummen stehen in material/eingefroren.sha256.
+material:
+  aufgaben: items.yaml
+  personen: personas_generated.yaml
+
+# Menschliche Vergleichswerte je Aufgabe, im Standardformat des Frameworks
+# (aufgabe, quelle, design, n, p_gain, p_loss, delta, se). Erzeugt von den
+# Skripten unter referenz_erstellen.
+referenzwerte: referenz/referenzwerte.csv
+
+# Geplanter Umfang: Durchlaeufe je Stufe und Bedingung, auf die Varianten
+# verteilt. Hergeleitet mit src/power.py.
+versuchsplan:
+  n: 910
+
+# Vor der Erhebung festgelegt.
+auswertung:
+  relevanzgrenze: 0.10        # Abstaende darunter gelten als praktisch bedeutungslos
+  schwelle_ungueltig: 0.05    # ab hier Zusatzrechnung zu ungueltigen Antworten
+
+# Bezeichnungen fuer Tabellen und Abbildungen.
+darstellung:
+  aufgaben:
+    asian_disease: Asian-Disease-Problem
+    monetary_endowment: Geldbeträge
+  stufen:
+    S0: keine Beschreibung
+    S1: Alter und Beruf
+    S2: zusätzlich Wohnsituation, Alltag, soziales Umfeld
+    S3: zusätzlich Bildungsweg, Gewohnheiten, eine Episode
+
+# Bereitet die Referenzdaten auf. Laeuft einmal, die Ergebnisse sind versioniert.
+referenz_erstellen:
+  - skripte/referenz_ml1.py
+  - skripte/referenz_ruggeri.py
+  - skripte/referenzwerte.py
+
+# Zusatzpruefungen, die nur fuer dieses Experiment sinnvoll sind. Jedes Skript
+# erhaelt die ausgewertete Tabelle eines Laufs (.parsed.csv) als Argument.
+pruefungen:
+  - skripte/kontamination.py

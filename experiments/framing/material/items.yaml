@@ -1,0 +1,43 @@
+# Entscheidungsaufgaben im Originalwortlaut der jeweiligen Referenzstudie.
+#
+# Die Sprache bleibt bewusst Englisch: Die menschlichen Vergleichsdaten wurden
+# englischsprachig (Many Labs 1) bzw. in 13 Sprachen inkl. Englisch (Ruggeri
+# et al., 2020) erhoben. Eine Uebersetzung wuerde die Vergleichbarkeit mit den
+# Referenzwerten gefaehrden.
+
+asian_disease:
+  source: "Many Labs 1 (Klein et al., 2014), Codebook diseaseframinga/b.html"
+  reference_dataset: ml1
+  intro: >-
+    Imagine that the United States is preparing for the outbreak of an unusual
+    disease, which is expected to kill 600 people. Two alternative programs to
+    fight the disease have been proposed. Assume that the exact scientific
+    estimate of the consequences of the program are as follows:
+  question: "Which program would you choose?"
+  frames:
+    gain:
+      sure: "If this program is adopted, 200 people will be saved."
+      risky: >-
+        If this program is adopted, there is 1/3 probability that 600 people
+        will be saved and 2/3 probability that no people will be saved.
+    loss:
+      sure: "If this program is adopted, 400 people will die."
+      risky: >-
+        If this program is adopted, there is 1/3 probability that no people
+        will die and 2/3 probability that 600 people will die.
+
+monetary_endowment:
+  source: >-
+    Ruggeri et al. (2020), Items 12/13 = Kahneman & Tversky (1979), Probleme 11/12
+  reference_dataset: ruggeri
+  intro: null
+  question: "Which option would you prefer?"
+  frames:
+    gain:
+      preamble: "Imagine we gave you $2,000 right now to play a game."
+      sure: "Receive an additional $1,000 for certain."
+      risky: "A 50% chance to receive an additional $2,000, and a 50% chance to receive nothing more."
+    loss:
+      preamble: "Imagine we gave you $4,000 right now to play a game."
+      sure: "Lose $1,000 for certain."
+      risky: "A 50% chance to lose $2,000, and a 50% chance to lose nothing."

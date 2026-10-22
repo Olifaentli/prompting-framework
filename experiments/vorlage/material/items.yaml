@@ -1,0 +1,19 @@
+# Aufgaben im Originalwortlaut der Studie, deren menschliche Daten als
+# Massstab dienen. Je Aufgabe zwei Bedingungen (gain, loss) mit je einer
+# Zieloption (sure) und einer Alternative (risky). Gemessen wird der Anteil
+# der Zieloption je Bedingung.
+#
+# PLATZHALTER: durch den echten Aufgabentext ersetzen.
+
+aufgabe_1:
+  source: "Quelle der Aufgabe und der Vergleichsdaten"
+  intro: >-
+    Replace this paragraph with the original introduction of the task.
+  question: "Which option would you choose?"
+  frames:
+    gain:
+      sure: "Option described in the first framing, with a certain outcome."
+      risky: "Option described in the first framing, with an uncertain outcome."
+    loss:
+      sure: "Option described in the second framing, with a certain outcome."
+      risky: "Option described in the second framing, with an uncertain outcome."

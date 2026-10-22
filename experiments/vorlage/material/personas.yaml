@@ -1,0 +1,35 @@
+# Personenbeschreibungen je Detailstufe.
+#
+# Die erste Stufe ohne Beschreibung ist die Baseline. Jede weitere Stufe sagt
+# mehr ueber dieselben Personen, aber nie etwas ueber eine Neigung, die die
+# Aufgabe beruehrt. Dieselbe Variante beschreibt auf allen Stufen dieselbe
+# Person.
+#
+# PLATZHALTER: durch eigene Beschreibungen ersetzen oder mit
+# src/generate_personas.py erzeugen.
+
+active_variants: [a, b]
+
+levels:
+  S0:
+    label: keine Beschreibung
+    has_variants: false
+    template: null
+  S1:
+    label: wenig Detail
+    has_variants: true
+    variants:
+      a: "You are 30 and work as a librarian."
+      b: "You are 45 and work as a bus driver."
+  S2:
+    label: mehr Detail
+    has_variants: true
+    variants:
+      a: >-
+        You are 30 and work as a librarian in a small town. You live with a
+        friend and walk to work along the river.
+      b: >-
+        You are 45 and work as a bus driver in a large city. You live with
+        your partner and two children near the depot.
+
+response_instruction: "Answer with exactly one letter, either A or B, and nothing else."
