@@ -1,0 +1,14 @@
+Stufe,Variante,Delta,Aufgabe
+S0,none,0.0483516483516484,asian_disease
+S1,a,0.42543859649122806,asian_disease
+S1,b,0.06578947368421051,asian_disease
+S1,c,0.03964757709251099,asian_disease
+S1,d,0.22466960352422904,asian_disease
+S2,a,0.27192982456140347,asian_disease
+S2,b,0.16666666666666663,asian_disease
+S2,c,0.11894273127753308,asian_disease
+S2,d,0.11894273127753308,asian_disease
+S3,a,0.10526315789473684,asian_disease
+S3,b,0.1228070175438597,asian_disease
+S3,c,0.048458149779735726,asian_disease
+S3,d,0.16299559471365643,asian_disease

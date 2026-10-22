@@ -1,0 +1,395 @@
+Experiment: experiments/framing
+
+== 1/6  Referenzwerte ==
+Versionierte Werte: experiments/framing/referenz/referenzwerte.csv
+(neu berechnen mit REFERENZ_NEU=1)
+
+== 2/6  Tests ==
+........................................................................ [ 62%]
+............................................                             [100%]
+116 passed in 4.15s
+
+== 3/6  Stichprobenplanung, Versuchsplan, Material ==
+=== Ausgangswerte ===
+Aufgabe: asian_disease, Referenz: Many Labs 1 (Klein et al., 2014)
+Menschliche Referenz: Delta = 0.287, Standardfehler = 0.0121
+Untergrenze der Intervallbreite: +/-0.024
+Diese Grenze stammt allein aus der Unsicherheit der Referenzdaten und
+laesst sich durch mehr Modellaufrufe nicht unterschreiten.
+
+=== Benoetigte Durchlaeufe je Zelle ===
+Zielgenauigkeit       n je Zelle   Aufrufe gesamt    Kosten  mit Batch
+----------------------------------------------------------------------
++/-0.10                      190            1,520     $0.20      $0.10
++/-0.07                      410            3,280     $0.43      $0.21
++/-0.05                      910            7,280     $0.95      $0.47
++/-0.04                    1,700           13,600     $1.77      $0.88
++/-0.03                    5,210           41,680     $5.42      $2.71
+
+Aufrufe und Kosten gelten je Item und Modell, bei 8 Auswertungs-
+einheiten (4 Detailstufen x 2 Rahmungen) und Claude Haiku 4.5.
+
+=== Empfehlung ===
+n = 910 je Zelle. Damit ist die Distanz auf +/-0.05 genau bestimmt,
+also deutlich schaerfer als die Relevanzgrenze von 0.10.
+Ein Modell und eine Aufgabe: 7,280 Aufrufe.
+  2 Aufgabe(n), 1 Modell(e):  14,560 Aufrufe, $1.89 bzw. $0.95 ueber die Batch-API
+  2 Aufgabe(n), 2 Modell(e):  29,120 Aufrufe, $3.79 bzw. $1.89 ueber die Batch-API
+
+=== Was verschiedene Umfaenge leisten ===
+      n     Intervall   Bewertung
+--------------------------------------------------------
+    100      +/-0.135   zu grob, sagt nichts aus
+    200      +/-0.097   grenzwertig
+    400      +/-0.070   grenzwertig
+    800      +/-0.053   brauchbar
+   1600      +/-0.041   gut
+
+Referenzwerte aus den menschlichen Daten
+           Aufgabe                           Quelle       Design    n  p_sicher_Gewinn  p_sicher_Verlust  Framing_Effekt  CI_unten  CI_oben
+     asian_disease Many Labs 1 (Klein et al., 2014) zwei Gruppen 6271            0.622             0.335           0.287     0.263    0.310
+monetary_endowment            Ruggeri et al. (2020)      gepaart 3666            0.744             0.385           0.359     0.338    0.379 
+
+Versuchsplan je Aufgabe und Modell (geplant: n = 910 je Stufe und Bedingung)
+Stufe                                             Inhalt Woerter  Varianten  Durchlaeufe_Gewinn  Durchlaeufe_Verlust
+   S0                                 keine Beschreibung       0          1                 910                  910
+   S1                                    Alter und Beruf   12-14          4                 910                  910
+   S2  zusätzlich Wohnsituation, Alltag, soziales Umfeld   45-58          4                 910                  910
+   S3 zusätzlich Bildungsweg, Gewohnheiten, eine Episode 114-124          4                 910                  910
+
+Aufrufe je Aufgabe und Modell: 7,280
+Aufrufe je Modell (2 Aufgabe(n)): 14,560
+
+Geschrieben: experiments/framing/ergebnisse/tabellen
+
+Geschrieben: experiments/framing/MATERIAL.md
+
+== 4/6  Auswertung je Modell ==
+Quelle: haupt_haiku.jsonl
+Modell: claude-haiku-4-5-20251001 | Temperatur: 1.0
+Trials: 14560
+API-Fehler: 0 (0.00%)
+Nicht parsebar: 0 (0.00%)
+
+Geschrieben: experiments/framing/laeufe/haupt_haiku.parsed.csv
+
+Lauf: haupt_haiku | Modell: claude-haiku-4-5-20251001
+
+===========================================================================
+Aufgabe: asian_disease
+Auswertbar: 7280 von 7280 (100.0%)
+Menschlicher Vergleichswert: 0.287 [0.263, 0.310], Many Labs 1 (Klein et al., 2014), zwei Gruppen
+
+=== Framing-Effekt je Detailstufe ===
+Stufe        n   Gewinn  Verlust   Delta     95%-Intervall  Abstand  klein
+---------------------------------------------------------------------------
+S0        1820    1.000    0.952   0.048    [0.036, 0.064]   -0.238   nein
+S1        1820    1.000    0.811   0.189    [0.165, 0.216]   -0.098   nein
+S2        1820    1.000    0.831   0.169    [0.146, 0.195]   -0.118   nein
+S3        1820    1.000    0.890   0.110    [0.091, 0.132]   -0.177   nein
+
+'klein' heisst: Der Unsicherheitsbereich des Abstands liegt vollstaendig
+innerhalb von +/-0.10.
+
+=== Zeigt das Modell den Effekt ohne Personenbeschreibung? ===
+Baseline S0: Delta = 0.048, Intervall [0.036, 0.064], Abstand zum Menschen -0.238
+  -> Ja, in derselben Richtung wie beim Menschen.
+
+=== Abstand zum Menschen nach Detailstufe ===
+  S0  -0.238   #############################
+  S1  -0.098   ############
+  S2  -0.118   ##############
+  S3  -0.177   #####################
+  Saettigung (Variante a): ab S1
+
+=== Kontrolle: Streuung zwischen den Formulierungen ===
+Stufe    Varianten  kleinstes  groesstes  Spannweite
+----------------------------------------------------
+S0               1      0.048      0.048       0.000
+S1               4      0.040      0.425       0.386
+S2               4      0.119      0.272       0.153
+S3               4      0.048      0.163       0.115
+
+=== Kontrolle: nicht auswertbare Antworten ===
+  S0 gain    0.0% nicht auswertbar, 0 API-Fehler
+  S0 loss    0.0% nicht auswertbar, 0 API-Fehler
+  S1 gain    0.0% nicht auswertbar, 0 API-Fehler
+  S1 loss    0.0% nicht auswertbar, 0 API-Fehler
+  S2 gain    0.0% nicht auswertbar, 0 API-Fehler
+  S2 loss    0.0% nicht auswertbar, 0 API-Fehler
+  S3 gain    0.0% nicht auswertbar, 0 API-Fehler
+  S3 loss    0.0% nicht auswertbar, 0 API-Fehler
+
+=== Kontrolle: Positionsbias ===
+  sichere Option vorn:   1.000  (n = 3634)
+  sichere Option hinten: 0.871  (n = 3646)
+  Differenz +0.129, Intervall [0.118, 0.140]
+
+===========================================================================
+Aufgabe: monetary_endowment
+Auswertbar: 7280 von 7280 (100.0%)
+Menschlicher Vergleichswert: 0.359 [0.338, 0.379], Ruggeri et al. (2020), gepaart
+
+=== Framing-Effekt je Detailstufe ===
+Stufe        n   Gewinn  Verlust   Delta     95%-Intervall  Abstand  klein
+---------------------------------------------------------------------------
+S0        1820    0.990    0.581   0.409    [0.376, 0.441]   +0.050     ja
+S1        1820    1.000    0.535   0.465    [0.432, 0.497]   +0.106   nein
+S2        1820    1.000    0.359   0.641    [0.609, 0.671]   +0.282   nein
+S3        1820    1.000    0.295   0.705    [0.675, 0.734]   +0.347   nein
+
+'klein' heisst: Der Unsicherheitsbereich des Abstands liegt vollstaendig
+innerhalb von +/-0.10.
+
+=== Zeigt das Modell den Effekt ohne Personenbeschreibung? ===
+Baseline S0: Delta = 0.409, Intervall [0.376, 0.441], Abstand zum Menschen +0.050
+  -> Ja, in derselben Richtung wie beim Menschen.
+
+=== Abstand zum Menschen nach Detailstufe ===
+  S0  +0.050   ######
+  S1  +0.106   #############
+  S2  +0.282   ##################################
+  S3  +0.347   ##########################################
+  Saettigung (Variante a): ab S2
+
+=== Kontrolle: Streuung zwischen den Formulierungen ===
+Stufe    Varianten  kleinstes  groesstes  Spannweite
+----------------------------------------------------
+S0               1      0.409      0.409       0.000
+S1               4      0.181      0.863       0.683
+S2               4      0.454      0.912       0.459
+S3               4      0.533      0.917       0.384
+
+=== Kontrolle: nicht auswertbare Antworten ===
+  S0 gain    0.0% nicht auswertbar, 0 API-Fehler
+  S0 loss    0.0% nicht auswertbar, 0 API-Fehler
+  S1 gain    0.0% nicht auswertbar, 0 API-Fehler
+  S1 loss    0.0% nicht auswertbar, 0 API-Fehler
+  S2 gain    0.0% nicht auswertbar, 0 API-Fehler
+  S2 loss    0.0% nicht auswertbar, 0 API-Fehler
+  S3 gain    0.0% nicht auswertbar, 0 API-Fehler
+  S3 loss    0.0% nicht auswertbar, 0 API-Fehler
+
+=== Kontrolle: Positionsbias ===
+  sichere Option vorn:   0.608  (n = 3634)
+  sichere Option hinten: 0.832  (n = 3646)
+  Differenz -0.225, Intervall [-0.244, -0.204]
+
+Tabellen: experiments/framing/ergebnisse/haupt_haiku
+Quelle: haupt_luna.jsonl
+Modell: gpt-6-luna | Temperatur: 1.0
+Trials: 14560
+API-Fehler: 0 (0.00%)
+Davon nicht auswertbar, weil ueber der Laengengrenze: 2
+Nicht parsebar: 2 (0.01%)
+Haeufigste ungueltige Antworten:
+
+Geschrieben: experiments/framing/laeufe/haupt_luna.parsed.csv
+
+Lauf: haupt_luna | Modell: gpt-6-luna
+
+===========================================================================
+Aufgabe: asian_disease
+Auswertbar: 7278 von 7280 (100.0%)
+Menschlicher Vergleichswert: 0.287 [0.263, 0.310], Many Labs 1 (Klein et al., 2014), zwei Gruppen
+
+=== Framing-Effekt je Detailstufe ===
+Stufe        n   Gewinn  Verlust   Delta     95%-Intervall  Abstand  klein
+---------------------------------------------------------------------------
+S0        1820    0.916    0.786   0.131    [0.099, 0.163]   -0.156   nein
+S1        1820    0.933    0.754   0.179    [0.147, 0.212]   -0.108   nein
+S2        1818    0.840    0.684   0.157    [0.118, 0.195]   -0.130   nein
+S3        1820    0.941    0.623   0.318    [0.282, 0.352]   +0.031     ja
+
+'klein' heisst: Der Unsicherheitsbereich des Abstands liegt vollstaendig
+innerhalb von +/-0.10.
+
+=== Zeigt das Modell den Effekt ohne Personenbeschreibung? ===
+Baseline S0: Delta = 0.131, Intervall [0.099, 0.163], Abstand zum Menschen -0.156
+  -> Ja, in derselben Richtung wie beim Menschen.
+
+=== Abstand zum Menschen nach Detailstufe ===
+  S0  -0.156   ###################
+  S1  -0.108   #############
+  S2  -0.130   ################
+  S3  +0.031   ####
+  Saettigung (Variante a): ab S3
+
+=== Kontrolle: Streuung zwischen den Formulierungen ===
+Stufe    Varianten  kleinstes  groesstes  Spannweite
+----------------------------------------------------
+S0               1      0.131      0.131       0.000
+S1               4      0.114      0.278       0.163
+S2               4      0.057      0.297       0.240
+S3               4      0.246      0.396       0.151
+
+=== Kontrolle: nicht auswertbare Antworten ===
+  S0 gain    0.0% nicht auswertbar, 0 API-Fehler
+  S0 loss    0.0% nicht auswertbar, 0 API-Fehler
+  S1 gain    0.0% nicht auswertbar, 0 API-Fehler
+  S1 loss    0.0% nicht auswertbar, 0 API-Fehler
+  S2 gain    0.2% nicht auswertbar, 0 API-Fehler
+  S2 loss    0.0% nicht auswertbar, 0 API-Fehler
+  S3 gain    0.0% nicht auswertbar, 0 API-Fehler
+  S3 loss    0.0% nicht auswertbar, 0 API-Fehler
+
+=== Kontrolle: Positionsbias ===
+  sichere Option vorn:   0.942  (n = 3633)
+  sichere Option hinten: 0.678  (n = 3645)
+  Differenz +0.264, Intervall [0.247, 0.281]
+
+===========================================================================
+Aufgabe: monetary_endowment
+Auswertbar: 7280 von 7280 (100.0%)
+Menschlicher Vergleichswert: 0.359 [0.338, 0.379], Ruggeri et al. (2020), gepaart
+
+=== Framing-Effekt je Detailstufe ===
+Stufe        n   Gewinn  Verlust   Delta     95%-Intervall  Abstand  klein
+---------------------------------------------------------------------------
+S0        1820    0.947    0.446   0.501    [0.465, 0.536]   +0.142   nein
+S1        1820    0.885    0.299   0.586    [0.548, 0.620]   +0.227   nein
+S2        1820    0.919    0.443   0.476    [0.438, 0.512]   +0.117   nein
+S3        1820    0.925    0.395   0.531    [0.493, 0.566]   +0.172   nein
+
+'klein' heisst: Der Unsicherheitsbereich des Abstands liegt vollstaendig
+innerhalb von +/-0.10.
+
+=== Zeigt das Modell den Effekt ohne Personenbeschreibung? ===
+Baseline S0: Delta = 0.501, Intervall [0.465, 0.536], Abstand zum Menschen +0.142
+  -> Ja, in derselben Richtung wie beim Menschen.
+
+=== Abstand zum Menschen nach Detailstufe ===
+  S0  +0.142   #################
+  S1  +0.227   ###########################
+  S2  +0.117   ##############
+  S3  +0.172   #####################
+  Saettigung (Variante a): ab S2
+
+=== Kontrolle: Streuung zwischen den Formulierungen ===
+Stufe    Varianten  kleinstes  groesstes  Spannweite
+----------------------------------------------------
+S0               1      0.501      0.501       0.000
+S1               4      0.463      0.700       0.238
+S2               4      0.361      0.570       0.209
+S3               4      0.515      0.539       0.024
+
+=== Kontrolle: nicht auswertbare Antworten ===
+  S0 gain    0.0% nicht auswertbar, 0 API-Fehler
+  S0 loss    0.0% nicht auswertbar, 0 API-Fehler
+  S1 gain    0.0% nicht auswertbar, 0 API-Fehler
+  S1 loss    0.0% nicht auswertbar, 0 API-Fehler
+  S2 gain    0.0% nicht auswertbar, 0 API-Fehler
+  S2 loss    0.0% nicht auswertbar, 0 API-Fehler
+  S3 gain    0.0% nicht auswertbar, 0 API-Fehler
+  S3 loss    0.0% nicht auswertbar, 0 API-Fehler
+
+=== Kontrolle: Positionsbias ===
+  sichere Option vorn:   0.625  (n = 3634)
+  sichere Option hinten: 0.690  (n = 3646)
+  Differenz -0.065, Intervall [-0.087, -0.043]
+
+Tabellen: experiments/framing/ergebnisse/haupt_luna
+
+== 5/6  Modellvergleich und Zusatzprüfungen des Experiments ==
+A = claude-haiku-4-5-20251001
+B = gpt-6-luna
+
+=== asian_disease (Mensch: 0.287) ===
+Stufe    Delta A  Delta B    A - B       95%-Intervall
+------------------------------------------------------
+S0         0.048    0.131   -0.082    [-0.117, -0.047]
+S1         0.189    0.179   +0.010     [-0.031, 0.051]
+S2         0.169    0.157   +0.012     [-0.033, 0.058]
+S3         0.110    0.318   -0.208    [-0.248, -0.167]
+Unterschied auf allen Stufen innerhalb +/-0.10: nein
+
+=== monetary_endowment (Mensch: 0.359) ===
+Stufe    Delta A  Delta B    A - B       95%-Intervall
+------------------------------------------------------
+S0         0.409    0.501   -0.092    [-0.141, -0.044]
+S1         0.465    0.586   -0.121    [-0.170, -0.072]
+S2         0.641    0.476   +0.165      [0.117, 0.213]
+S3         0.705    0.531   +0.175      [0.128, 0.221]
+Unterschied auf allen Stufen innerhalb +/-0.10: nein
+
+Tabellen: experiments/framing/ergebnisse/vergleich
+
+Kontaminationspruefung: haupt_haiku.parsed.csv (claude-haiku-4-5-20251001)
+
+==================================================================
+PRUEFUNG 1 — Original oder Replikation?
+==================================================================
+
+Modell (Baseline S0, n = 1820):
+  p(sicher | Gewinn)  1.000
+  p(sicher | Verlust) 0.952
+  Framing-Effekt      0.048  [0.036, 0.064]
+
+Vergleichswert                       Delta   Abstand
+----------------------------------------------------
+Tversky & Kahneman 1981 (beruehmt)   0.500     0.452
+Many Labs 1 (kaum zitiert)           0.287     0.238
+
+  Signal: keines. Das Modell liegt von beiden Werten mehr als 0.10 entfernt;
+  die Pruefung kann dann nicht zwischen Erinnerung und Entscheidung trennen.
+
+==================================================================
+PRUEFUNG 2 — Bekannte gegen weniger bekannte Aufgabe
+==================================================================
+
+Aufgabe                          Modell   Mensch   Abstand
+----------------------------------------------------------
+Asian Disease (sehr bekannt)      0.048    0.287    -0.238
+Geldbetraege (kaum bekannt)       0.409    0.359    +0.050
+
+  Signal: Der Effekt tritt auch bei der weniger bekannten Aufgabe auf.
+  Erinnerung erklaert das Ergebnis schlecht, da hier kaum publizierte
+  Werte zum Abrufen bereitstehen.
+
+==================================================================
+Beide Pruefungen liefern Hinweise, keine Beweise. Sie gehoeren in die
+Limitationen und begrenzen, wie weit sich das Verfahren auf neue
+Fragestellungen uebertragen laesst.
+==================================================================
+
+Kontaminationspruefung: haupt_luna.parsed.csv (gpt-6-luna)
+
+==================================================================
+PRUEFUNG 1 — Original oder Replikation?
+==================================================================
+
+Modell (Baseline S0, n = 1820):
+  p(sicher | Gewinn)  0.916
+  p(sicher | Verlust) 0.786
+  Framing-Effekt      0.131  [0.099, 0.163]
+
+Vergleichswert                       Delta   Abstand
+----------------------------------------------------
+Tversky & Kahneman 1981 (beruehmt)   0.500     0.369
+Many Labs 1 (kaum zitiert)           0.287     0.156
+
+  Signal: keines. Das Modell liegt von beiden Werten mehr als 0.10 entfernt;
+  die Pruefung kann dann nicht zwischen Erinnerung und Entscheidung trennen.
+
+==================================================================
+PRUEFUNG 2 — Bekannte gegen weniger bekannte Aufgabe
+==================================================================
+
+Aufgabe                          Modell   Mensch   Abstand
+----------------------------------------------------------
+Asian Disease (sehr bekannt)      0.131    0.287    -0.156
+Geldbetraege (kaum bekannt)       0.501    0.359    +0.142
+
+  Signal: Der Effekt tritt auch bei der weniger bekannten Aufgabe auf.
+  Erinnerung erklaert das Ergebnis schlecht, da hier kaum publizierte
+  Werte zum Abrufen bereitstehen.
+
+==================================================================
+Beide Pruefungen liefern Hinweise, keine Beweise. Sie gehoeren in die
+Limitationen und begrenzen, wie weit sich das Verfahren auf neue
+Fragestellungen uebertragen laesst.
+==================================================================
+
+== 6/6  Abbildungen ==
+Geschrieben: experiments/framing/ergebnisse/abbildungen/abbildung_effekt_je_stufe.png (+ .svg)
+Geschrieben: experiments/framing/ergebnisse/abbildungen/abbildung_varianten.png (+ .svg)

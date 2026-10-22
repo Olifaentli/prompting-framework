@@ -1,0 +1,9 @@
+Stufe,Rahmung,n,API_Fehler,nicht_auswertbar,Anteil_nicht_auswertbar,Aufgabe
+S0,gain,910,0,0,0.0,asian_disease
+S0,loss,910,0,0,0.0,asian_disease
+S1,gain,910,0,0,0.0,asian_disease
+S1,loss,910,0,0,0.0,asian_disease
+S2,gain,910,0,2,0.002197802197802198,asian_disease
+S2,loss,910,0,0,0.0,asian_disease
+S3,gain,910,0,0,0.0,asian_disease
+S3,loss,910,0,0,0.0,asian_disease
